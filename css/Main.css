@@ -1,0 +1,348 @@
+body {
+    border: none !important;
+    height: calc(100% - 20px);
+    width: calc(100% - 20px);
+}
+
+html {
+    position: absolute;
+    height: calc(100% - 0px);
+    width: calc(100% - 0px);
+    overflow: hidden;
+}
+
+.menu_body {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 20px;
+    width: 100%;
+    z-index: 100;
+}
+
+.menu {
+    position: absolute;
+    margin-top: -5px !important;
+    height: 16px;
+    min-width: 400px;
+    z-index: 100;
+    background: none !important;
+    border: none !important;
+    overflow: visible !important;
+}
+
+.menu_font {
+    position: relative;
+    font-size: 10px;
+    height: 10px;
+    padding-bottom: 2px !important;
+    line-height: 1 !important;
+}
+
+.item_font {
+    position: relative;
+    font-size: 10px;
+    padding: 0 !important;
+    line-height: 2 !important;
+}
+
+.icon_bar {
+
+    position: absolute;
+    left: 0;
+    top: 20px;
+    height: 28px;
+    width: 100%;
+    z-index: 50;
+    overflow: hidden;
+}
+
+.img_iconbar {
+    height: 21px;
+    width: 21px;
+    margin-top: 1px;
+    padding: 2px;
+    text-align: center;
+    border: 1px solid transparent;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+
+.main {
+    position: absolute;
+    overflow: hidden;
+    bottom: 0;
+    left: 0px;
+    height: calc(100% - 50px);
+    width: 100%;
+    margin: 0 !important;
+
+}
+
+
+
+
+.toolbox_slider_body {
+    position: absolute !important;
+    width: 25px;
+    top: 0;
+    right: 0;
+    height: 100%;
+    border-right: 2px solid #333333;
+    border-left: 2px solid #333333;
+}
+
+.toolbox_slider {
+    position: absolute !important;
+    width: 23px;
+    top: 12px;
+    right: 4px;
+    height: calc(100% - 24px) !important;
+}
+
+
+
+
+
+
+.prg_body {
+    position: absolute !important;
+    top: 0;
+    left: 150px;
+    width: calc(100% - 150px);
+    height: 100%;
+    overflow: hidden;
+    background-color: transparent !important;
+}
+
+.prg_panel {
+    position: relative;
+    width: 4000px;
+    height: 2000px;
+    padding: 3px;
+    border: 3px solid #000000;
+    outline: 3px solid #ffffff;
+}
+
+.ui-helper-hidden {
+    z-index: 900
+}
+#m_file_lb {
+    float: right;
+    margin-right: 3px;
+}
+
+#m_file {
+    float: right;
+    margin-right: 20px;
+}
+
+/*Infobox XXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+
+.info_box {
+
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+    text-align: center !important;
+}
+
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+    float: none !important;
+}
+
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+/*Scrollbar Horizontal*/
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+
+#scrollbar_body_h {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20px !important;
+    z-index: 300;
+}
+
+.scroll_bar_h {
+    position: absolute !important;
+}
+
+.scrollbar_wrap_h {
+    position: absolute;
+    bottom: 2px;
+    left: 0px;
+    width: calc(100% - 22px);
+    height: 14px !important;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.scroll-bar-wrap_h .ui-slider {
+    border: 0;
+    height: 14px;
+    margin: 0 auto;
+}
+
+.scroll-bar-wrap_h .ui-handle-helper-parent {
+    position: relative;
+    width: 100%;
+    height: 1px;
+    margin: auto;
+}
+
+.scroll-bar-wrap_h .ui-slider-handle {
+    top: 1px !important;
+    height: 1.5em;
+}
+
+.scroll-bar-wrap_h .ui-slider-handle .ui-icon {
+    margin: -8px auto 0;
+    position: relative;
+    top: 50%;
+}
+
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+/*Scrollbar Vertical*/
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+
+#scrollbar_body_v {
+    position: absolute;
+    top: 0px;
+    right: 0;
+    height: calc(100% - 0px);
+    width: 20px !important;
+    z-index: 300;
+}
+
+#scrollbar_body_toolbox {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: calc(100% - 0px);
+    width: 20px !important;
+}
+
+.scroll_bar_v {
+    position: absolute !important;
+}
+
+.scrollbar_wrap_v {
+    position: absolute;
+    top: 10px !important;
+    left: 2px;
+    height: calc(100% - 30px);
+    width: 14px !important;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.scroll-bar-wrap_v .ui-slider {
+    border: 0;
+    width: 14px;
+    margin: 0 auto;
+}
+
+.scroll-bar-wrap_v .ui-handle-helper-parent {
+    position: relative;
+    height: 100%;
+    width: 1px;
+    margin: auto;
+}
+
+.scroll-bar-wrap_v .ui-slider-handle {
+    left: 1px !important;
+    width: 1.5em;
+}
+
+.scroll-bar-wrap_v .ui-slider-handle .ui-icon {
+    margin: auto;
+    position: relative;
+}
+
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+/* Save Dialog*/
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+
+.text_save {
+    size: 250px;
+
+}
+
+#txt_save {
+    position: absolute;
+    bottom: 80px;
+    left: 10px;
+    width: 490px;
+
+}
+
+#btn_save_ok {
+    position: absolute !important;
+    width: 150px !important;
+    left: 10px;
+    bottom: 20px;
+
+}
+
+#btn_save_del {
+    position: absolute !important;
+    width: 150px !important;
+    left: 185px;
+    bottom: 20px;
+
+}
+
+#btn_save_abbrechen {
+    position: absolute !important;
+    width: 150px !important;
+    right: 10px;
+    bottom: 20px;
+}
+
+#gbox_grid_save {
+    position: absolute;
+    left: 10px;
+    top: 20px;
+}
+
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+/* open Dialog*/
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+#gbox_grid_open {
+    position: absolute;
+    left: 10px;
+    top: 20px;
+}
+
+.ui-jqgrid-bdiv {
+    overflow-x: hidden !important;
+}
+
+#btn_open_ok {
+    position: absolute !important;
+    width: 150px !important;
+    left: 20px;
+    bottom: 20px;
+
+}
+
+#btn_open_del {
+    position: absolute !important;
+    width: 150px !important;
+    left: 185px;
+    bottom: 20px;
+
+}
+
+#btn_open_abbrechen {
+    position: absolute !important;
+    width: 150px !important;
+    right: 20px;
+    bottom: 20px;
+
+}

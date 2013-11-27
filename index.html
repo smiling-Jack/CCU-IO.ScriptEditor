@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <link rel="stylesheet" href="css/Main.css"/>
+    <link rel="stylesheet" href="css/jquery.ui.multiselect.css"/>
+    <link rel="stylesheet" href="css/ui-menu-horizontal.css"/>
+    <link rel="stylesheet" href="css/jquery.contextMenu.css"/>
+    <link rel="stylesheet" href="css/ui.jqgrid.css"/>
+
+    <script type="text/javascript" src="js/lib/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/lib/jquery-ui-1.10.3.custom.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.ui.multiselect.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.contextMenu.js"></script>
+
+
+    <!--<script type="text/javascript" src="js/lib/jquery.ba-resize.min.js"></script>-->
+    <script type="text/javascript" src="js/lib/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="js/lib/loStorage.js"></script>
+    <script type="text/javascript" src="js/lib/can.jquery.min.js"></script>
+
+
+    <script type="text/javascript" src="js/lib/codemirror.js"></script>
+    <script type="text/javascript" src="js/lib/cm/addons/closebrackets.js"></script>
+    <script type="text/javascript" src="js/lib/cm/addons/closetag.js"></script>
+    <script type="text/javascript" src="js/lib/cm/addons/matchbrackets.js"></script>
+    <script type="text/javascript" src="js/lib/cm/addons/active-line.js"></script>
+    <script type="text/javascript" src="js/lib/cm/addons/match-highlighter.js"></script>
+    <script type="text/javascript" src="js/lib/cm/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" src="js/lib/cm/mode/homematic/homematic.js"></script>
+    <script type="text/javascript" src="js/lib/cm/mode/xml/xml.js"></script>
+    <script type="text/javascript" src="js/lib/cm/mode/shell/shell.js"></script>
+    <script type="text/javascript" src="js/lib/cm/mode/tcl/tcl.js"></script>
+
+
+    <script type="text/javascript" src="js/ScriptGUI.js"></script>
+    <script type="text/javascript" src="js/Menu.js"></script>
+    <script type="text/javascript" src="js/Translate.js"></script>
+
+</head>
+
+<body class="ui-widget-content">
+
+
+<div id="menu_body" class="menu_body ui-state-default">
+    <ul id="menu" class=" menu ">
+        <li><a class="menu_font ">Datei</a>
+            <ul>
+                <li><a id="m_neu" class="item_font">Neu</a></li>
+                <li><a id="m_open" class="item_font">Öffnen</a></li>
+                <li><a id="m_save" class="item_font">Speichern</a></li>
+                <li><a id="m_save_as" class="item_font">Speichern als</a></li>
+                <li><a class="item_font">Export</a></li>
+            </ul>
+        </li>
+        <li><a class="menu_font">Einstellungen</a>
+            <ul>
+                <li><a class="item_font">Theme ></a>
+                    <ul id="ul_theme">
+                        <li><a class="item_font" data-info="dark-hive">Dark-Hive</a></li>
+                        <li><a class="item_font" data-info="start">Start</a></li>
+                    </ul>
+                </li>
+                <li><a class="item_font">Empty</a></li>
+                <li><a class="item_font">Empty</a></li>
+                <li><a class="item_font">Empty</a></li>
+            </ul>
+        </li>
+        <li><a class="menu_font ">Test</a>
+            <ul>
+                <li><a class="item_font">Empty</a></li>
+                <li><a class="item_font">Empty</a></li>
+                <li><a class="item_font">Empty</a></li>
+
+            </ul>
+        </li>
+        <li><a class="menu_font">Help</a>
+            <ul>
+                <li><a id="clear_cache" class="item_font">Clear_Cache</a></li>
+                <li><a class="item_font">Empty</a></li>
+                <li><a class="item_font">Empty</a></li>
+                <li><a class="item_font">Empty</a></li>
+
+            </ul>
+        </li>
+    </ul>
+
+    <a id="m_file" class="item_font">Neu</a>
+    <a id="m_file_lb" class="item_font">Datei:</a>
+</div>
+<div id="icon_bar" class="icon_bar ui-state-default">
+
+</div>
+
+<div id="main" class="main">
+    <div id="prg_body" class="prg_body scroll-pane ">
+        <div id="prg_panel" class="prg_panel scroll-content">
+        </div>
+        <div id="scrollbar_body_h" class="scrollbar_body_h frame_color">
+            <div class="scrollbar_wrap_h scroll-bar-wrap_h ui-widget-content ">
+                <div id="scroll_bar_h" class="scroll_bar_h"></div>
+            </div>
+        </div>
+        <div id="scrollbar_body_v" class="scrollbar_body_v frame_color">
+            <div class="scrollbar_wrap_v scroll-bar-wrap_v ui-widget-content ">
+                <div id="scroll_bar_v" class="scroll_bar_v"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
