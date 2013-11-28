@@ -3,7 +3,7 @@ CCU-IO.ScriptEditor
 
 Textbasierter Script Editor für CCU.IO Scripte
 
-Nutzung zur Anzeige der Scripte im CCU.iO Scriptordner möglich !!!
+##Nutzung möglich !!!
 
 
 
