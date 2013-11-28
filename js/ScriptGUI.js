@@ -1,6 +1,6 @@
 /**
- *  CCU-IO.ScripGUI
- *  http://github.com/smiling-Jack/CCU-IO.ScriptGUI
+ *  CCU-IO.ScripEditor
+ *  http://github.com/smiling-Jack/CCU-IO.ScriptEditor
  *
  *  Copyright (c) 2013 Steffen Schorling http://github.com/smiling-Jack
  *  MIT License (MIT)
@@ -20,6 +20,9 @@ var SEdit = {
 
     file_name: "",
     prg_store: "www/ScriptGUI/prg_Store/",
+    script_store: "scripts/",
+
+
 
 
     Setup: function () {
@@ -33,8 +36,8 @@ var SEdit = {
         $("head").append('<link id="theme_css" rel="stylesheet" href="css/' + theme + '/jquery-ui-1.10.3.custom.min.css"/>');
 
         // slider XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        SEdit.scrollbar_h("init", $(".scroll-pane"), $(".scroll-content"), $("#scroll_bar_h"), 50);
-        SEdit.scrollbar_v("init", $(".scroll-pane"), $(".scroll-content"), $("#scroll_bar_v"), 50);
+
+//        SEdit.scrollbar_v("init", $(".CodeMirror"), $(".CodeMirror-scroll"), $("#scroll_bar_v"),100);
 
 
         var key = "";
@@ -71,16 +74,17 @@ var SEdit = {
         });
 
         // Toolbox XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        $(".toolbox").hide();
-
-
-
 
 
         console.log("Finish_Setup");
 
         SEdit.menu_iconbar();
 //        SEdit.context_menu();
+        SEdit.Editor();
+        SEdit.scrollbar_v("init", $(".CodeMirror"), $(".CodeMirror-scroll"), $("#scroll_bar_v"), 100);
+        SEdit.scrollbar_h("init", $(".CodeMirror"), $(".CodeMirror-scroll"), $("#scroll_bar_h"), 0);
+     SEdit.load_ordner()
+
     },
 
     scrollbar_h: function (init, scrollPane_h, scroll_content, scroll_bar_h, value) {
@@ -131,8 +135,13 @@ var SEdit = {
         //size scrollbar and handle proportionally to scroll distance
         function sizeScrollbar_h() {
             var remainder = scrollContent.width() - scrollPane.width();
-            var proportion = remainder / scrollContent.width();
-            var handleSize = scrollPane.width() - ( proportion * scrollPane.width() );
+            if (remainder < 0) {
+                var handleSize = scroll_bar_h.parent().width() - 6;
+            } else {
+                var proportion = remainder / scrollContent.width();
+                var handleSize = scrollPane.width() - ( proportion * scrollPane.width() );
+            }
+
             scrollbar.find(".ui-slider-handle").css({
                 width: handleSize,
                 height: "10px",
@@ -207,7 +216,7 @@ var SEdit = {
 
                     } else {
                         scrollContent.css("margin-top", 0);
-
+                        console.log(scroll_content)
                     }
                 },
                 change: function (event, ui) {
@@ -217,6 +226,8 @@ var SEdit = {
                         ) + "px");
 
                     } else {
+
+
                         scrollContent.css("margin-top", 0);
 
                     }
@@ -238,11 +249,16 @@ var SEdit = {
         }
         //size scrollbar and handle proportionally to scroll distance
         function sizeScrollbar_v() {
-
             var remainder = scrollContent.height() - scrollPane.height();
-            var proportion = remainder / scrollContent.height();
-            var handleSize = scrollPane.height() - ( proportion * scrollPane.height() );
+            if (remainder < 0) {
+                console.log(remainder);
+                var handleSize = scroll_bar_v.parent().height() - 6;
 
+            } else {
+                scroll_bar_v.css({visibility: "visible"});
+                var proportion = remainder / scrollContent.height();
+                var handleSize = scrollPane.height() - ( proportion * scrollPane.height() );
+            }
             scrollbar.find(".ui-slider-handle").css({
 
                 height: handleSize,
@@ -273,11 +289,11 @@ var SEdit = {
             var showing = scrollContent.height() + parseInt(scrollContent.css("margin-top"), 10);
             var gap = scrollPane.height() - showing;
             if (gap > 0) {
-                scrollContent.css("margin-top", parseInt(scrollContent.css("margin-top"), 10) + gap);
+                scrollContent.css("margin-top", 0);
             }
         }
 
-        //change handle position on window resize
+        //change handle on window resize
         $(window).resize(function () {
             $(scroll_bar_v).find("a").css({"background-image": "url(css/" + theme + "/images/scrollbar_r.png",
                 backgroundRepeat: "repeat"});
@@ -290,8 +306,16 @@ var SEdit = {
             }, 300);
         });
 
+        //change handle on content resize
+        $(scrollContent).resize(function () {
+            $(scroll_bar_v).find("a").css({"background-image": "url(css/" + theme + "/images/scrollbar_r.png",
+                backgroundRepeat: "repeat"});
+            resetValue_v();
+            sizeScrollbar_v();
+            reflowContent_v();
+        });
 
-        //init scrollbar size
+        //init scrollbar sizz
         setTimeout(sizeScrollbar_v, 100);//safari wants a timeout
 
 
@@ -313,17 +337,67 @@ var SEdit = {
             console.log("Finish_Scrollbar_V");
         }
 
+    },
+
+    Editor: function () {
+
+
+ editor = CodeMirror.fromTextArea(document.getElementById("codemirror"), {
+            mode: {name: "javascript", json: true},
+            viewportMargin: Infinity
+        });
+
+       editor.setOption("lineNumbers", true);
+////        editor.setOption("readOnly", false);
+//        editor.setOption("autoCloseTags", true);
+//        editor.setOption("autoCloseBrackets", true);
+//        editor.setOption("matchBrackets", true);
+//        editor.setOption("styleActiveLine", true);
+//        editor.setOption("highlightSelectionMatches", true);
+        editor.setOption("theme", "monokai");
+        //        editor.setOption("mode", "javascript");
+    },
+
+    load_ordner: function () {
+        SEdit.socket.emit("readdirStat", SEdit.script_store, function (data) {
+            console.log(data);
+            $.each(data, function () {
+                $("#toolbox_files").append('<div id="'+this.file.split(".")[0]+'" class="div_file">'+this.file.split(".")[0]+'</div>')
+            });
+
+            $(".div_file").click(function () {
+                $(this).effect("highlight");
+                SEdit.socket.emit("readRawFile", SEdit.script_store + $(this).attr("id")+".js", function (data) {
+                    console.log(data)
+                    editor.setOption("value", data.toString());
+
+
+                });
+
+
+        }).hover(
+            function () {
+                $(this).addClass("ui-state-focus");
+            }, function () {
+                $(this).removeClass("ui-state-focus");
+            }
+        );
+
+
+        });
+
+
     }
 };
 
 
-
-
-
 (function () {
     $(document).ready(function () {
-
-
+        try {
+            SEdit.socket = io.connect($(location).attr('protocol') + '//' + $(location).attr('host'));
+        } catch (err) {
+            alert("Keine Verbindung zu CCU.IO");
+        }
         SEdit.Setup();
 
 //todo Ordentliches disable sichen was man auch wieder einzelnt enabeln kann

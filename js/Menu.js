@@ -1,6 +1,6 @@
 /**
- *  CCU-IO.ScripGUI
- *  http://github.com/smiling-Jack/CCU-IO.ScriptGUI
+ *  CCU-IO.ScripEditor
+ *  http://github.com/smiling-Jack/CCU-IO.ScriptEditor
  *
  *  Copyright (c) 2013 Steffen Schorling http://github.com/smiling-Jack
  *  MIT License (MIT)

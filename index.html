@@ -8,14 +8,18 @@
     <link rel="stylesheet" href="css/ui-menu-horizontal.css"/>
     <link rel="stylesheet" href="css/jquery.contextMenu.css"/>
     <link rel="stylesheet" href="css/ui.jqgrid.css"/>
+    <link rel="stylesheet" href="css/codemirror.css"/>
+    <link rel="stylesheet" href="theme/monokai.css"/>
+
 
     <script type="text/javascript" src="js/lib/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="js/lib/jquery-ui-1.10.3.custom.js"></script>
     <script type="text/javascript" src="js/lib/jquery.ui.multiselect.js"></script>
     <script type="text/javascript" src="js/lib/jquery.contextMenu.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 
 
-    <!--<script type="text/javascript" src="js/lib/jquery.ba-resize.min.js"></script>-->
+    <script type="text/javascript" src="js/lib/jquery.ba-resize.min.js"></script>
     <script type="text/javascript" src="js/lib/jquery.mousewheel.js"></script>
     <script type="text/javascript" src="js/lib/loStorage.js"></script>
     <script type="text/javascript" src="js/lib/can.jquery.min.js"></script>
@@ -94,8 +98,23 @@
 </div>
 
 <div id="main" class="main">
+    <div id="toolbox_body" class="toolbox_body">
+
+        <div id="scrollbar_body_toolbox" class="scrollbar_body_v frame_color">
+            <div class="scrollbar_wrap_v scroll-bar-wrap_v ui-widget-content ">
+                <div id="scroll_bar_toolbox" class="scroll_bar_v"></div>
+            </div>
+        </div>
+
+        <div id="toolbox_files" class="toolbox frame_color">
+
+        </div>
+    </div>
+
+
     <div id="prg_body" class="prg_body scroll-pane ">
         <div id="prg_panel" class="prg_panel scroll-content">
+            <textarea id="codemirror" name="codemirror" class="code frame_color ui-corner-all"></textarea>
         </div>
         <div id="scrollbar_body_h" class="scrollbar_body_h frame_color">
             <div class="scrollbar_wrap_h scroll-bar-wrap_h ui-widget-content ">
