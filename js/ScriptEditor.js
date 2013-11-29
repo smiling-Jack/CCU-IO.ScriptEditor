@@ -368,7 +368,7 @@ var SEdit = {
             $(".div_file").click(function () {
                 $(this).effect("highlight");
                 SEdit.socket.emit("readRawFile", SEdit.script_store + $(this).attr("id")+".js", function (data) {
-                    console.log(data)
+                    console.log(data);
                     editor.setOption("value", data.toString());
 
 
