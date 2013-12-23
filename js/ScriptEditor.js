@@ -394,7 +394,7 @@ var SEdit = {
 (function () {
     $(document).ready(function () {
         try {
-            SEdit.socket = io.connect($(location).attr('protocol') + '//' + $(location).attr('host'));
+            SEdit.socket = io.connect($(location).attr('protocol') + '//' + $(location).attr('host')+"?key="+socketSession);
         } catch (err) {
             alert("Keine Verbindung zu CCU.IO");
         }
