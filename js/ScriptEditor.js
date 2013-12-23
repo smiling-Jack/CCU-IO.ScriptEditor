@@ -23,8 +23,6 @@ var SEdit = {
     script_store: "scripts/",
 
 
-
-
     Setup: function () {
         console.log("Start_Setup");
 
@@ -75,7 +73,6 @@ var SEdit = {
 
         // Toolbox XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
-
         console.log("Finish_Setup");
 
         SEdit.menu_iconbar();
@@ -83,7 +80,7 @@ var SEdit = {
         SEdit.Editor();
         SEdit.scrollbar_v("init", $(".CodeMirror"), $(".CodeMirror-scroll"), $("#scroll_bar_v"), 100);
         SEdit.scrollbar_h("init", $(".CodeMirror"), $(".CodeMirror-scroll"), $("#scroll_bar_h"), 0);
-     SEdit.load_ordner()
+        SEdit.load_ordner()
 
     },
 
@@ -342,12 +339,12 @@ var SEdit = {
     Editor: function () {
 
 
- editor = CodeMirror.fromTextArea(document.getElementById("codemirror"), {
+        editor = CodeMirror.fromTextArea(document.getElementById("codemirror"), {
             mode: {name: "javascript", json: true},
             viewportMargin: Infinity
         });
 
-       editor.setOption("lineNumbers", true);
+        editor.setOption("lineNumbers", true);
 ////        editor.setOption("readOnly", false);
 //        editor.setOption("autoCloseTags", true);
 //        editor.setOption("autoCloseBrackets", true);
@@ -360,28 +357,33 @@ var SEdit = {
 
     load_ordner: function () {
         SEdit.socket.emit("readdirStat", SEdit.script_store, function (data) {
-            console.log(data);
+
             $.each(data, function () {
-                $("#toolbox_files").append('<div id="'+this.file.split(".")[0]+'" class="div_file">'+this.file.split(".")[0]+'</div>')
+                console.log(this.file.split(".")[1]);
+                if (this.file.split(".")[1] == "js") {
+                    $("#toolbox_files").append('<div id="' + this.file.split(".")[0] + '" class="div_file">' + this.file.split(".")[0] + '</div>')
+                }
             });
 
             $(".div_file").click(function () {
                 $(this).effect("highlight");
-                SEdit.socket.emit("readRawFile", SEdit.script_store + $(this).attr("id")+".js", function (data) {
-                    console.log(data);
-                    editor.setOption("value", data.toString());
-
+                var name = $(this).attr("id");
+                SEdit.socket.emit("readRawFile", SEdit.script_store + $(this).attr("id") + ".js", function (data) {
+                    editor.setOption("value", data);
+                    console.log(data.toString())
+                    SEdit.file_name = name;
+                    $("#m_file").text(SEdit.file_name);
 
                 });
 
 
-        }).hover(
-            function () {
-                $(this).addClass("ui-state-focus");
-            }, function () {
-                $(this).removeClass("ui-state-focus");
-            }
-        );
+            }).hover(
+                function () {
+                    $(this).addClass("ui-state-focus");
+                }, function () {
+                    $(this).removeClass("ui-state-focus");
+                }
+            );
 
 
         });
@@ -394,7 +396,7 @@ var SEdit = {
 (function () {
     $(document).ready(function () {
         try {
-            SEdit.socket = io.connect($(location).attr('protocol') + '//' + $(location).attr('host')+"?key="+socketSession);
+            SEdit.socket = io.connect($(location).attr('protocol') + '//' + $(location).attr('host') + "?key=" + socketSession);
         } catch (err) {
             alert("Keine Verbindung zu CCU.IO");
         }

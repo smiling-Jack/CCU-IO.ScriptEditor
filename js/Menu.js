@@ -17,7 +17,9 @@ jQuery.extend(true, SEdit, {
 
         $("#menu").menu({position: {at: "left bottom"}});
         $("#m_neu").click(function () {
-            SEdit.clear();
+            editor.setValue("");
+            SEdit.file_name = "";
+            $("#m_file").text(SEdit.file_name);
         });
         $("#m_save").click(function () {
             if ($("body").find(".ui-dialog").length == 0) {
@@ -81,7 +83,7 @@ jQuery.extend(true, SEdit, {
     save_as_ccu_io: function () {
 
         try {
-            SEdit.socket.emit("readdirStat", SEdit.prg_store, function (data) {
+            SEdit.socket.emit("readdirStat", "scripts/", function (data) {
                 var files = [];
                 var sel_file = "";
 
@@ -141,18 +143,27 @@ jQuery.extend(true, SEdit, {
                 });
 
                 $("#btn_save_ok").button().click(function () {
-                    var data = SEdit.make_savedata();
+//                    var data = SEdit.make_savedata();
                     if ($("#txt_save").val() == "") {
                         alert("Bitte Dateiname eingeben")
                     } else {
                         try {
-                            SEdit.socket.emit("writeRawFile", "www/ScriptGUI/prg_Store/" + $("#txt_save").val() + ".prg", JSON.stringify(data));
+                            console.log(editor.getValue())
+                            SEdit.socket.emit("writeRawFile", "scripts/" + $("#txt_save").val() + ".js", editor.getValue());
                             SEdit.file_name = $("#txt_save").val();
                             $("#m_file").text(SEdit.file_name);
 
                         } catch (err) {
                             alert("Keine Verbindung zu CCU.io")
                         }
+
+                        var n = $("#toolbox_files").children();
+                        $.each(n, function () {
+                            $(this).remove();
+
+
+                        });
+                        SEdit.load_ordner();
                         $("#dialog_save").remove();
                     }
                 });
@@ -183,105 +194,105 @@ jQuery.extend(true, SEdit, {
         if (SEdit.file_name == "") {
             SEdit.save_as_ccu_io()
         } else {
-            var data = SEdit.make_savedata();
+
             try {
-                SEdit.socket.emit("writeRawFile", "www/ScriptGUI/prg_Store/" + SEdit.file_name + ".prg", JSON.stringify(data));
+                SEdit.socket.emit("writeRawFile", "scripts/" + SEdit.file_name + ".js", editor.getValue());
             } catch (err) {
                 alert("Keine Verbindung zu CCU.IO")
             }
         }
     },
 
-    open_ccu_io: function () {
-        var sel_file = "";
-
-        try {
-            SEdit.socket.emit("readdirStat", SEdit.prg_store, function (data) {
-                var files = [];
-
-
-                $("body").append('\
-                   <div id="dialog_open" style="text-align: center" title="Öffnen">\
-                   <br>\
-                       <table id="grid_open"></table>\
-                        <br>\
-                       <button id="btn_open_ok" >Öffnen</button>\
-                       <button id="btn_open_del" >Löschen</button>\
-                       <button id="btn_open_abbrechen" >Abbrechen</button>\
-                   </div>');
-                $("#dialog_open").dialog({
-                    height: 500,
-                    width: 520,
-                    resizable: false,
-                    close: function () {
-                        $("#dialog_open").remove();
-                    }
-                });
-
-                $.each(data, function () {
-
-                    var file = {
-                        name: this["file"].split(".")[0],
-                        typ: this["file"].split(".")[1],
-                        date: this["stats"]["mtime"].split("T")[0],
-                        size: this["stats"]["size"]
-                    };
-                    files.push(file);
-
-                });
-
-                $("#grid_open").jqGrid({
-                    datatype: "local",
-                    width: 500,
-                    height: 330,
-                    data: files,
-                    forceFit: true,
-                    multiselect: false,
-                    gridview: false,
-                    shrinkToFit: false,
-                    scroll: false,
-                    colNames: ['Datei', 'Größe', 'Typ', "Datum"],
-                    colModel: [
-                        {name: 'name', index: 'name', width: 240, sorttype: "name"},
-                        {name: 'size', index: 'size', width: 80, align: "right", sorttype: "name"},
-                        {name: 'typ', index: 'typ', width: 60, align: "center", sorttype: "name"},
-                        {name: 'date', index: 'date', width: 100, sorttype: "name"}
-                    ],
-                    onSelectRow: function (file) {
-                        sel_file = $("#grid_open").jqGrid('getCell', file, 'name') + "." + $("#grid_open").jqGrid('getCell', file, 'typ');
-                    }
-                });
-
-
-                $("#btn_open_abbrechen").button().click(function () {
-                    $("#dialog_open").remove();
-                });
-
-                $("#btn_open_del").button().click(function () {
-                    row_id = $("#grid_open").jqGrid('getGridParam', 'selrow');
-                    SEdit.socket.emit("delRawFile", SEdit.prg_store + sel_file, function (ok) {
-                        if (ok == true) {
-                            $("#grid_open").delRowData(row_id);
-                        } else {
-                            alert("Löschen nicht möglich");
-                        }
-                    })
-                });
-
-                $("#btn_open_ok").button().click(function () {
-                    SEdit.socket.emit("readJsonFile", SEdit.prg_store + sel_file, function (data) {
-                        SEdit.clear();
-                        SEdit.load_prg(data);
-                        SEdit.file_name = sel_file.split(".")[0];
-                        $("#m_file").text(SEdit.file_name);
-                    });
-                    $("#dialog_open").remove();
-                });
-            });
-        } catch (err) {
-            alert("Keine Verbindung zu CCU.IO");
-        }
-    },
+//    open_ccu_io: function () {
+//        var sel_file = "";
+//
+//        try {
+//            SEdit.socket.emit("readdirStat", SEdit.prg_store, function (data) {
+//                var files = [];
+//
+//
+//                $("body").append('\
+//                   <div id="dialog_open" style="text-align: center" title="Öffnen">\
+//                   <br>\
+//                       <table id="grid_open"></table>\
+//                        <br>\
+//                       <button id="btn_open_ok" >Öffnen</button>\
+//                       <button id="btn_open_del" >Löschen</button>\
+//                       <button id="btn_open_abbrechen" >Abbrechen</button>\
+//                   </div>');
+//                $("#dialog_open").dialog({
+//                    height: 500,
+//                    width: 520,
+//                    resizable: false,
+//                    close: function () {
+//                        $("#dialog_open").remove();
+//                    }
+//                });
+//
+//                $.each(data, function () {
+//
+//                    var file = {
+//                        name: this["file"].split(".")[0],
+//                        typ: this["file"].split(".")[1],
+//                        date: this["stats"]["mtime"].split("T")[0],
+//                        size: this["stats"]["size"]
+//                    };
+//                    files.push(file);
+//
+//                });
+//
+//                $("#grid_open").jqGrid({
+//                    datatype: "local",
+//                    width: 500,
+//                    height: 330,
+//                    data: files,
+//                    forceFit: true,
+//                    multiselect: false,
+//                    gridview: false,
+//                    shrinkToFit: false,
+//                    scroll: false,
+//                    colNames: ['Datei', 'Größe', 'Typ', "Datum"],
+//                    colModel: [
+//                        {name: 'name', index: 'name', width: 240, sorttype: "name"},
+//                        {name: 'size', index: 'size', width: 80, align: "right", sorttype: "name"},
+//                        {name: 'typ', index: 'typ', width: 60, align: "center", sorttype: "name"},
+//                        {name: 'date', index: 'date', width: 100, sorttype: "name"}
+//                    ],
+//                    onSelectRow: function (file) {
+//                        sel_file = $("#grid_open").jqGrid('getCell', file, 'name') + "." + $("#grid_open").jqGrid('getCell', file, 'typ');
+//                    }
+//                });
+//
+//
+//                $("#btn_open_abbrechen").button().click(function () {
+//                    $("#dialog_open").remove();
+//                });
+//
+//                $("#btn_open_del").button().click(function () {
+//                    row_id = $("#grid_open").jqGrid('getGridParam', 'selrow');
+//                    SEdit.socket.emit("delRawFile", SEdit.prg_store + sel_file, function (ok) {
+//                        if (ok == true) {
+//                            $("#grid_open").delRowData(row_id);
+//                        } else {
+//                            alert("Löschen nicht möglich");
+//                        }
+//                    })
+//                });
+//
+//                $("#btn_open_ok").button().click(function () {
+//                    SEdit.socket.emit("readJsonFile", SEdit.prg_store + sel_file, function (data) {
+//                        SEdit.clear();
+//                        SEdit.load_prg(data);
+//                        SEdit.file_name = sel_file.split(".")[0];
+//                        $("#m_file").text(SEdit.file_name);
+//                    });
+//                    $("#dialog_open").remove();
+//                });
+//            });
+//        } catch (err) {
+//            alert("Keine Verbindung zu CCU.IO");
+//        }
+//    },
 
     save_Script: function () {
         var script = Compiler.make_prg();

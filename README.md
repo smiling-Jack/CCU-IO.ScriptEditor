@@ -1,11 +1,14 @@
 CCU-IO.ScriptEditor
 ===================
 
-Textbasierter Script Editor für CCU.IO Scripte
+Textbasierter (Codemirror) Script Editor für CCU.IO Scripte
 
 ##Nutzung möglich !!!
 
+Changelog
 
+### 0.0.2
+* Open/Save bugfix
 
 
 
