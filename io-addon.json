@@ -1,9 +1,9 @@
 {
-    "version": "0.0.21",
+    "version": "0.0.2",
     "name": "ScriptEditor",
     "ident": "SCRIPTEDITOR",
     "dirname": "ScriptEditor",
     "urlHomepage": "http://ccu.io/addons.html#scripteditor",
-    "urlDownload": "http://linktrack.info/.llyh?CCU-IO.ScriptEditor",
+    "urlDownload": "https://github.com/smiling-Jack/CCU-IO.ScriptEditor/archive/master.zip",
     "urlMeta": "https://raw.github.com/smiling-Jack/CCU-IO.ScriptEditor/master/io-addon.json"
 }
