@@ -7,6 +7,10 @@ Textbasierter (Codemirror) Script Editor für CCU.IO Scripte
 
 Changelog
 
+### 0.0.4
+* remove Linktrack
+* Bugfix Meta URL
+
 ### 0.0.3
 * Linktrack
 
