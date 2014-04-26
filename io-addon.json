@@ -4,6 +4,6 @@
     "ident": "SCRIPTEDITOR",
     "dirname": "ScriptEditor",
     "urlHomepage": "http://ccu.io/addons.html#scripteditor",
-    "urlDownload": "http://linktrack.info/.lqap?CCU-IO.ScriptEditor",
+    "urlDownload": "https://github.com/smiling-Jack/CCU-IO.ScriptEditor/archive/master.zip",
     "urlMeta": "https://raw.githubusercontent.com/smiling-Jack/CCU-IO.ScriptEditor/master/io-addon.json"
 }
