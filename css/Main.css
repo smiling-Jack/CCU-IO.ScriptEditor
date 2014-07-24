@@ -85,7 +85,8 @@ html {
     width: 150px;
     top: 0;
     height: calc(100% - 0px);
-    overflow: hidden !important;
+    overflow: auto !important;
+    word-wrap: normal;
 }
 #toolbox_files{
     min-height: 100%;
@@ -100,6 +101,8 @@ html {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
+    word-wrap: break-word;
+    border: 1px solid transparent;
 
 }
 
@@ -107,17 +110,18 @@ html {
     position: absolute !important;
     top: 0;
     left: 150px;
-    width: calc(100% - 150px);
+    width: calc(100% - 130px);
 
-    height: 100%;
+    height: calc(100% - -20px);
     overflow: hidden;
     background-color: transparent !important;
 }
 
 .prg_panel {
     position: relative;
-    width: calc(100% - 22px);
-    height: calc(100% - 22px);
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    overflow: scroll;
 
 }
 
@@ -359,32 +363,18 @@ html {
 
 /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
 .CodeMirror {
-    position: absolute;
-    left:0px;
-    top:0px;
+    left: 0;
 
-
-    border: 1px solid #eee!important;
-    min-width: 100%;
-    min-height: 100%!important;
-    height: auto!important;
-    max-height: 100%;
-    overflow: hidden!important;
-    vertical-align: top;
+    border: 1px solid #eee !important;
+    height: auto !important;
+    max-height: 99;
+    min-height: 100%;
 
 }
 
-.CodeMirror-scroll{
-    min-width: 99%;
-    min-height: 99%!important;
-    display: inline-block;
 
 
-}
 
-.CodeMirror-vscrollbar{
-    /*visibility: hidden;*/
-}
-.CodeMirror-hscrollbar{
-    /*visibility: hidden;*/
-}
+
+
+

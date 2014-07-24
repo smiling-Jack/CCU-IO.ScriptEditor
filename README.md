@@ -3,9 +3,13 @@ CCU-IO.ScriptEditor
 
 Textbasierter (Codemirror) Script Editor für CCU.IO Scripte
 
+##Es wird keine weitere Entwicklung meinerseits stattfinden der Editor wird Teil von ScriptGUI werden
+
 ##Nutzung möglich !!!
 
 Changelog
+### 0.1.2
+* Use default scrollbars
 
 ### 0.1.1
 * remove Linktrack
